@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="map.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .leaflet-container img { max-width: none !important; }
+        .leaflet-container { background: #ffffff; }
+        .leaflet-tile-pane {
+            filter: hue-rotate(180deg) saturate(0.8) brightness(0.89) contrast(1.4);
+        }
+
+    </style>
+    
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
     <a href="login.html">login t</a>
@@ -63,11 +72,8 @@
                         <span class="text-xs bg-emerald-100 text-emerald-800 font-medium px-2 py-1 rounded">3 Rotas Ativas</span>
                     </div>
                     <!-- Placeholder do Mapa (Onde entraria Google Maps/Leaflet) -->
-                    <div id="map" class="flex-1 bg-blue-50 flex items-center justify-center text-blue-400 p-8 text-center">
-                        <div>
-                            <p class="text-4xl mb-2">📍</p>
-                            <p class="text-sm font-medium text-blue-800">Mapa de Rotas Integrado</p>
-                            <p class="text-xs text-blue-600 max-w-xs mt-1">Exibindo os próximos atendimentos ordenados por proximidade geográfica.</p>
+                    <div class="flex-1 bg-blue-50 flex items-center justify-center text-blue-400 p-8 text-center">
+                        <div id="map" class="h-[420px] w-full">
                         </div>
                     </div>
                 </div>
@@ -115,6 +121,6 @@
 
         </main>
     </div>
-
+<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
