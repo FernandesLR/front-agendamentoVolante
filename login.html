@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetVolante - Acesso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-50 flex items-center justify-center p-4 font-sans text-slate-800">
+
+    <main class="w-full max-w-md">
+
+        <!-- IDENTIDADE -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-14 h-14 bg-blue-600 rounded-xl text-white text-2xl font-bold mb-4">
+                🐾
+            </div>
+            <h1 class="text-2xl font-bold text-slate-900">VetVolante</h1>
+            <p class="text-sm text-slate-500 mt-1">
+                Gestão de atendimentos veterinários
+            </p>
+        </div>
+
+        <!-- CARD DE AUTENTICAÇÃO -->
+        <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 sm:p-8">
+
+            <!-- ABAS -->
+            <div class="grid grid-cols-2 bg-slate-100 p-1 rounded-lg mb-6">
+                <button id="loginTab"
+                    onclick="setMode('login')"
+                    class="py-2 text-sm font-semibold rounded-md bg-white text-slate-900 shadow-sm">
+                    Entrar
+                </button>
+
+                <button id="registerTab"
+                    onclick="setMode('register')"
+                    class="py-2 text-sm font-semibold rounded-md text-slate-500">
+                    Criar conta
+                </button>
+            </div>
+
+            <div class="mb-6">
+                <h2 id="formTitle" class="text-xl font-bold">Bem-vindo de volta!</h2>
+                <p id="formDescription" class="text-sm text-slate-500 mt-1">
+                    Entre com seus dados para acessar o sistema.
+                </p>
+            </div>
+
+            <!-- TIPO DE USUÁRIO -->
+            <div class="mb-5">
+                <label class="block text-sm font-medium mb-2">
+                    Tipo de acesso
+                </label>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="clinicBtn"
+                        onclick="setRole('clinic')"
+                        class="border-2 border-blue-600 bg-blue-50 text-blue-700 rounded-lg p-3 text-sm font-semibold">
+                        Clínica
+                    </button>
+
+                    <button id="adminBtn"
+                        onclick="setRole('admin')"
+                        class="border border-slate-200 text-slate-600 rounded-lg p-3 text-sm font-semibold hover:bg-slate-50">
+                        Administrador
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO -->
+            <form id="authForm" class="space-y-4">
+
+                <!-- CAMPOS EXCLUSIVOS DO CADASTRO -->
+                <div id="registerFields" class="hidden space-y-4">
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">
+                            Nome da clínica
+                        </label>
+                        <input type="text" placeholder="Ex: Clínica São Francisco"
+                            class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">
+                            CNPJ
+                        </label>
+                        <input type="text" placeholder="00.000.000/0000-00"
+                            class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                    </div>
+
+                </div>
+
+                <!-- E-MAIL -->
+                <div>
+                    <label class="block text-sm font-medium mb-1">
+                        E-mail
+                    </label>
+                    <input type="email" required placeholder="seu@email.com"
+                        class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                </div>
+
+                <!-- SENHA -->
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-sm font-medium">Senha</label>
+                        <a href="#" class="text-xs text-blue-600 hover:underline">
+                            Esqueceu a senha?
+                        </a>
+                    </div>
+
+                    <input type="password" required placeholder="Sua senha"
+                        class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                </div>
+
+                <!-- CONFIRMAR SENHA -->
+                <div id="confirmPassword" class="hidden">
+                    <label class="block text-sm font-medium mb-1">
+                        Confirmar senha
+                    </label>
+                    <input type="password" placeholder="Digite novamente sua senha"
+                        class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                </div>
+
+                <!-- BOTÃO -->
+                <button id="submitBtn" type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg text-sm transition">
+                    Entrar no sistema
+                </button>
+
+            </form>
+
+            <p id="adminNotice" class="hidden text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3 mt-4">
+                O acesso administrativo é destinado a contas previamente autorizadas. Não é possível criar uma conta de administrador por este formulário.
+            </p>
+
+        </div>
+
+        <!-- RODAPÉ -->
+        <p class="text-center text-xs text-slate-400 mt-6">
+            VetVolante © 2026 · Todos os direitos reservados
+        </p>
+
+    </main>
+
+</body>
+</html>
