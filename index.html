@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetVolante - Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="map.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+    <a href="login.html">login t</a>
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="flex flex-col md:flex-row min-h-screen">
+
+        <!-- NAV LATERAL (WEB) / TOP NAV (MOBILE) -->
+        <aside class="w-full md:w-64 bg-slate-900 text-white p-6 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center gap-3 mb-8">
+                    <!-- Ícone de Patinha/Maleta -->
+                    <div class="bg-blue-600 p-2 rounded-lg text-white">🐾</div>
+                    <span class="text-xl font-bold tracking-wide">VetVolante</span>
+                </div>
+                <nav class="space-y-2">
+                    <a href="#" class="flex items-center gap-3 bg-blue-600 text-white px-4 py-3 rounded-lg font-medium">
+                        🗓️ Agenda do Dia
+                    </a>
+                    <a href="#" class="flex items-center gap-3 text-slate-400 hover:text-white px-4 py-3 rounded-lg transition">
+                        👥 Meus Pacientes
+                    </a>
+                    <a href="#" class="flex items-center gap-3 text-slate-400 hover:text-white px-4 py-3 rounded-lg transition">
+                        📍 Regiões de Atendimento
+                    </a>
+                </nav>
+            </div>
+            <div class="mt-6 pt-6 border-t border-slate-800 text-sm text-slate-400">
+                Dr. Silva • Veterinário Volante
+            </div>
+        </aside>
+
+        <!-- ÁREA DE CONTEÚDO -->
+        <main class="flex-1 p-4 md:p-8 space-y-6">
+            
+            <!-- HEADER -->
+            <header class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-800">Roteiro de Hoje</h1>
+                    <p class="text-sm text-slate-500">Quinta-feira, 29 de Outubro</p>
+                </div>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow-sm transition">
+                    + Novo Agendamento
+                </button>
+            </header>
+
+            <!-- LAYOUT EM DOIS BLOCOS (MAPA + LISTA) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- COLUNA 1 & 2: MAPA DA ROTA -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden min-h-[300px] flex flex-col justify-between">
+                    <div class="p-4 bg-slate-100 border-b border-slate-200 flex justify-between items-center">
+                        <span class="font-semibold text-slate-700">Visualização do Trajeto</span>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 font-medium px-2 py-1 rounded">3 Rotas Ativas</span>
+                    </div>
+                    <!-- Placeholder do Mapa (Onde entraria Google Maps/Leaflet) -->
+                    <div id="map" class="flex-1 bg-blue-50 flex items-center justify-center text-blue-400 p-8 text-center">
+                        <div>
+                            <p class="text-4xl mb-2">📍</p>
+                            <p class="text-sm font-medium text-blue-800">Mapa de Rotas Integrado</p>
+                            <p class="text-xs text-blue-600 max-w-xs mt-1">Exibindo os próximos atendimentos ordenados por proximidade geográfica.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUNA 3: CRONOGRAMA DE ATENDIMENTOS -->
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-700 px-1">Próximas Paradas</h3>
+
+                    <!-- CARD DE ATENDIMENTO 1 (PRÓXIMO) -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-blue-600 border-y border-r border-slate-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-sm font-bold text-blue-600">14:00</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 font-medium px-2 py-0.5 rounded">A Caminho</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800">Thor (Golden Retriever)</h4>
+                        <p class="text-xs text-slate-500 mb-3">Tutor: Carlos Eduardo</p>
+                        <div class="bg-slate-50 p-2 rounded text-xs text-slate-600 mb-3 flex items-center gap-2">
+                            📍 Moema - Av. Jamaris, 420
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-blue-600 text-white text-xs font-medium py-2 rounded text-center hover:bg-blue-700 transition">
+                                🗺️ Abrir GPS
+                            </button>
+                            <button class="bg-slate-100 text-slate-700 text-xs font-medium px-3 py-2 rounded hover:bg-slate-200 transition">
+                                📞 Ligar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD DE ATENDIMENTO 2 (AGUARDANDO) -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-slate-300 border-y border-r border-slate-200 opacity-75">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-sm font-bold text-slate-600">16:30</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded">Agendado</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800">Luna (Persa)</h4>
+                        <p class="text-xs text-slate-500 mb-3">Tutora: Mariana Souza</p>
+                        <div class="bg-slate-50 p-2 rounded text-xs text-slate-600 flex items-center gap-2">
+                            📍 Vila Mariana - Rua Vergueiro, 1200
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
