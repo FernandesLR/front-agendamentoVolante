@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VetVolante - Acesso</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./authService.js" defer></script>
 </head>
 
 <body class="min-h-screen bg-slate-50 flex items-center justify-center p-4 font-sans text-slate-800">
@@ -28,13 +28,13 @@
 
             <!-- ABAS -->
             <div class="grid grid-cols-2 bg-slate-100 p-1 rounded-lg mb-6">
-                <button id="loginTab"
+                <button type="button" id="loginTab"
                     onclick="setMode('login')"
                     class="py-2 text-sm font-semibold rounded-md bg-white text-slate-900 shadow-sm">
                     Entrar
                 </button>
 
-                <button id="registerTab"
+                <button type="button" id="registerTab"
                     onclick="setMode('register')"
                     class="py-2 text-sm font-semibold rounded-md text-slate-500">
                     Criar conta
@@ -55,13 +55,13 @@
                 </label>
 
                 <div class="grid grid-cols-2 gap-3">
-                    <button id="clinicBtn"
+                    <button type="button" id="clinicBtn"
                         onclick="setRole('clinic')"
                         class="border-2 border-blue-600 bg-blue-50 text-blue-700 rounded-lg p-3 text-sm font-semibold">
                         Clínica
                     </button>
 
-                    <button id="adminBtn"
+                    <button type="button" id="adminBtn"
                         onclick="setRole('admin')"
                         class="border border-slate-200 text-slate-600 rounded-lg p-3 text-sm font-semibold hover:bg-slate-50">
                         Administrador
@@ -75,19 +75,66 @@
                 <!-- CAMPOS EXCLUSIVOS DO CADASTRO -->
                 <div id="registerFields" class="hidden space-y-4">
 
+                    <!-- NOME -->
                     <div>
-                        <label class="block text-sm font-medium mb-1">
+                        <label for="nome" class="block text-sm font-medium mb-1">
                             Nome da clínica
                         </label>
-                        <input type="text" placeholder="Ex: Clínica São Francisco"
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Ex: Clínica São Francisco"
+                            required
+                            autocomplete="organization"
                             class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
                     </div>
 
+                    <!-- CNPJ -->
                     <div>
-                        <label class="block text-sm font-medium mb-1">
+                        <label for="cnpj" class="block text-sm font-medium mb-1">
                             CNPJ
                         </label>
-                        <input type="text" placeholder="00.000.000/0000-00"
+                        <input
+                            type="text"
+                            id="cnpj"
+                            name="cnpj"
+                            placeholder="00.000.000/0000-00"
+                            maxlength="18"
+                            inputmode="numeric"
+                            required
+                            class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                    </div>
+
+                    <!-- ENDEREÇO -->
+                    <div>
+                        <label for="endereco" class="block text-sm font-medium mb-1">
+                            Endereço
+                        </label>
+                        <input
+                            type="text"
+                            id="endereco"
+                            name="endereco"
+                            placeholder="Rua, número, bairro e cidade"
+                            required
+                            autocomplete="street-address"
+                            class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                    </div>
+
+                    <!-- TELEFONE -->
+                    <div>
+                        <label for="telefone" class="block text-sm font-medium mb-1">
+                            Telefone
+                        </label>
+                        <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(00) 00000-0000"
+                            maxlength="15"
+                            inputmode="numeric"
+                            required
+                            autocomplete="tel"
                             class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
                     </div>
 
@@ -95,32 +142,53 @@
 
                 <!-- E-MAIL -->
                 <div>
-                    <label class="block text-sm font-medium mb-1">
+                    <label for="email" class="block text-sm font-medium mb-1">
                         E-mail
                     </label>
-                    <input type="email" required placeholder="seu@email.com"
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="seu@email.com"
+                        autocomplete="email"
                         class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
                 </div>
 
                 <!-- SENHA -->
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <label class="text-sm font-medium">Senha</label>
+                        <label for="senha" class="text-sm font-medium">
+                            Senha
+                        </label>
+
                         <a href="#" class="text-xs text-blue-600 hover:underline">
                             Esqueceu a senha?
                         </a>
                     </div>
 
-                    <input type="password" required placeholder="Sua senha"
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        required
+                        minlength="5"
+                        placeholder="Sua senha"
+                        autocomplete="current-password"
                         class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
                 </div>
 
                 <!-- CONFIRMAR SENHA -->
                 <div id="confirmPassword" class="hidden">
-                    <label class="block text-sm font-medium mb-1">
+                    <label for="confirmarSenha" class="block text-sm font-medium mb-1">
                         Confirmar senha
                     </label>
-                    <input type="password" placeholder="Digite novamente sua senha"
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        placeholder="Digite novamente sua senha"
+                        minlength="5"
+                        autocomplete="new-password"
                         class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
                 </div>
 
